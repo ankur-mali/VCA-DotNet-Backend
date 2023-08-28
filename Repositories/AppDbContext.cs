@@ -29,6 +29,8 @@ namespace VCA.Repositories
 
         public DbSet<Registration> Registrations { get; set; }
 
+        public DbSet<Component> Components { get; set; }    
+
     }
 
 }

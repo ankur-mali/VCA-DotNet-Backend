@@ -21,7 +21,6 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Services\Login\" />
-    <Folder Include="Services\Component\" />
     <Folder Include="Services\AlternateComponent\" />
     <Folder Include="Services\Vehical\" />
   </ItemGroup>

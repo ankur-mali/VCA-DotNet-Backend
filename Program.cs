@@ -25,6 +25,7 @@ namespace VCA
             builder.Services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
             builder.Services.AddTransient<IModelRepository,ModelRepository>();
             builder.Services.AddTransient<IRegistrationRepository,RegistrationRepository>();
+            builder.Services.AddTransient<IComponentRepository,ComponentRepository>();
             builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection")));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

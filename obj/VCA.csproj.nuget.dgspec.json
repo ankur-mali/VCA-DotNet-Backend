@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Study Related\\VCA BOTH\\crud-backend-dotnet\\VCA.csproj": {}
+    "D:\\Study Related\\VCA BOTH\\VCA-backend-dotnet\\VCA.csproj": {}
   },
   "projects": {
-    "D:\\Study Related\\VCA BOTH\\crud-backend-dotnet\\VCA.csproj": {
+    "D:\\Study Related\\VCA BOTH\\VCA-backend-dotnet\\VCA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Study Related\\VCA BOTH\\crud-backend-dotnet\\VCA.csproj",
+        "projectUniqueName": "D:\\Study Related\\VCA BOTH\\VCA-backend-dotnet\\VCA.csproj",
         "projectName": "VCA",
-        "projectPath": "D:\\Study Related\\VCA BOTH\\crud-backend-dotnet\\VCA.csproj",
+        "projectPath": "D:\\Study Related\\VCA BOTH\\VCA-backend-dotnet\\VCA.csproj",
         "packagesPath": "C:\\Users\\ankur\\.nuget\\packages\\",
-        "outputPath": "D:\\Study Related\\VCA BOTH\\crud-backend-dotnet\\obj\\",
+        "outputPath": "D:\\Study Related\\VCA BOTH\\VCA-backend-dotnet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ankur\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -24,7 +24,7 @@ namespace VCA.Controllers
 
         [HttpGet]
         [Route("manufacturer/{manuId}/{segId}")]
-        public async Task<IActionResult> GetModelsByManufacturerAndSegment(long manuId, long segId)
+        public async Task<IActionResult> GetModelsByManufacturerAndSegment(int manuId, int segId)
         {
             var models = await _modelRepository.FindByManufacturerIdAndSegmentIdAsync(manuId, segId);
             return Ok(models);

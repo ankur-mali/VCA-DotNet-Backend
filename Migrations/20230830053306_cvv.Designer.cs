@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VCA.Repositories;
 
@@ -11,9 +12,11 @@ using VCA.Repositories;
 namespace VCA.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230830053306_cvv")]
+    partial class cvv
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace VCA.Migrations
 
                     b.HasIndex("mod_id");
 
-                    b.ToTable("alternate_components", (string)null);
+                    b.ToTable("alternate_components");
                 });
 
             modelBuilder.Entity("VCA.Models.Component", b =>
@@ -76,7 +79,7 @@ namespace VCA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("components", (string)null);
+                    b.ToTable("components");
                 });
 
             modelBuilder.Entity("VCA.Models.Manufacturer", b =>
@@ -98,7 +101,7 @@ namespace VCA.Migrations
 
                     b.HasIndex("SegId");
 
-                    b.ToTable("manufacturers", (string)null);
+                    b.ToTable("manufacturers");
                 });
 
             modelBuilder.Entity("VCA.Models.Model", b =>
@@ -146,7 +149,7 @@ namespace VCA.Migrations
 
                     b.HasIndex("SegId");
 
-                    b.ToTable("Models", (string)null);
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("VCA.Models.Registration", b =>
@@ -210,7 +213,7 @@ namespace VCA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("registration", (string)null);
+                    b.ToTable("registration");
                 });
 
             modelBuilder.Entity("VCA.Models.Segment", b =>
@@ -228,7 +231,7 @@ namespace VCA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("segments", (string)null);
+                    b.ToTable("segments");
                 });
 
             modelBuilder.Entity("VCA.Models.Vehicle", b =>
@@ -272,7 +275,7 @@ namespace VCA.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("vehicles", (string)null);
+                    b.ToTable("vehicles");
                 });
 
             modelBuilder.Entity("VCA.Models.AlternateComponent", b =>

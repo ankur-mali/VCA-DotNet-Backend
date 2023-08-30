@@ -13,8 +13,7 @@ namespace VCA.Models
         [Required]
         public string CompName { get; set; }
 
-        [Required]
-        public string CompType { get; set; } 
+        
 
  
     }

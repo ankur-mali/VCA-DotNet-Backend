@@ -39,7 +39,7 @@ namespace VCA.Repositories
                 return null;
 
             existingComponent.CompName = component.CompName;
-            existingComponent.CompType = component.CompType;
+          
             
 
             await _dbContext.SaveChangesAsync();

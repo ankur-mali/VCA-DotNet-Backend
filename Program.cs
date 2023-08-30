@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using VCA.Services.Verient;
 using Microsoft.EntityFrameworkCore.Internal;
 using VCA.Services.Registrations;
+using VCA.Services.AlternateComponent;
 
 namespace VCA
 {
@@ -26,6 +27,7 @@ namespace VCA
             builder.Services.AddTransient<IModelRepository,ModelRepository>();
             builder.Services.AddTransient<IRegistrationRepository,RegistrationRepository>();
             builder.Services.AddTransient<IComponentRepository,ComponentRepository>();
+            builder.Services.AddTransient<IAlternateComponentRepository, AlternateComponentRepository>();
             builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection")));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

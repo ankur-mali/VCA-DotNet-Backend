@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VCA.Repositories;
 
@@ -11,9 +12,11 @@ using VCA.Repositories;
 namespace VCA.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230828132827_as")]
+    partial class @as
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,46 +24,6 @@ namespace VCA.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("VCA.Models.AlternateComponent", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("AltCompIdId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("DeltaPrice")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("comp_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("mod_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AltCompIdId");
-
-                    b.HasIndex("comp_id");
-
-                    b.HasIndex("mod_id");
-
-                    b.ToTable("alternate_components", (string)null);
-                });
 
             modelBuilder.Entity("VCA.Models.Component", b =>
                 {
@@ -76,7 +39,7 @@ namespace VCA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("components", (string)null);
+                    b.ToTable("components");
                 });
 
             modelBuilder.Entity("VCA.Models.Manufacturer", b =>
@@ -98,7 +61,7 @@ namespace VCA.Migrations
 
                     b.HasIndex("SegId");
 
-                    b.ToTable("manufacturers", (string)null);
+                    b.ToTable("manufacturers");
                 });
 
             modelBuilder.Entity("VCA.Models.Model", b =>
@@ -146,7 +109,7 @@ namespace VCA.Migrations
 
                     b.HasIndex("SegId");
 
-                    b.ToTable("Models", (string)null);
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("VCA.Models.Registration", b =>
@@ -210,7 +173,7 @@ namespace VCA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("registration", (string)null);
+                    b.ToTable("registration");
                 });
 
             modelBuilder.Entity("VCA.Models.Segment", b =>
@@ -228,7 +191,7 @@ namespace VCA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("segments", (string)null);
+                    b.ToTable("segments");
                 });
 
             modelBuilder.Entity("VCA.Models.Vehicle", b =>
@@ -272,34 +235,7 @@ namespace VCA.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("vehicles", (string)null);
-                });
-
-            modelBuilder.Entity("VCA.Models.AlternateComponent", b =>
-                {
-                    b.HasOne("VCA.Models.Component", "AltCompId")
-                        .WithMany()
-                        .HasForeignKey("AltCompIdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VCA.Models.Component", "CompId")
-                        .WithMany()
-                        .HasForeignKey("comp_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VCA.Models.Model", "ModId")
-                        .WithMany()
-                        .HasForeignKey("mod_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AltCompId");
-
-                    b.Navigation("CompId");
-
-                    b.Navigation("ModId");
+                    b.ToTable("vehicles");
                 });
 
             modelBuilder.Entity("VCA.Models.Manufacturer", b =>

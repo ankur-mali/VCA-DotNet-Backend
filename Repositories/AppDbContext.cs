@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using VCA.Models;
 
 
@@ -19,8 +18,18 @@ namespace VCA.Repositories
             {
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectModels;Initial Catalog=DemoData;Integrated Security=True");
             }
+
+
         }
         
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configure the relationship for AlternateComponent entity
+        
+
+
+            // ... Other configurations
+        }
         public DbSet<Segment> Segments { get; set; }
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
@@ -29,7 +38,11 @@ namespace VCA.Repositories
 
         public DbSet<Registration> Registrations { get; set; }
 
-        public DbSet<Component> Components { get; set; }    
+        public DbSet<Component> Components { get; set; }   
+        
+        public DbSet<Vehicle> Vehicles { get; set; }
+
+        public DbSet<AlternateComponent> AlternateComponents { get; set; }
 
     }
 

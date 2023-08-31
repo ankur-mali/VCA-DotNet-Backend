@@ -11,11 +11,10 @@ namespace VCA.Models
         public int Id { get; set; }
 
         [Required]
-        public string CompName { get; set; }
+        public string ?CompName { get; set; }
 
-        
 
- 
+        public ICollection<AlternateComponent> AlternateComponents { get; set; }
     }
 }
 

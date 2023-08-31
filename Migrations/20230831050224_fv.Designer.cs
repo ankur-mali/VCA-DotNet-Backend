@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VCA.Repositories;
 
@@ -11,9 +12,11 @@ using VCA.Repositories;
 namespace VCA.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230831050224_fv")]
+    partial class fv
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,13 +33,10 @@ namespace VCA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AltCompId")
+                    b.Property<int?>("ComponentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AltComponentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompId")
+                    b.Property<int?>("ComponentId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -51,14 +51,24 @@ namespace VCA.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("mod_id")
+                    b.Property<int>("alt_comp_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("comp_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("mod_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AltCompId");
+                    b.HasIndex("ComponentId");
 
-                    b.HasIndex("AltComponentId");
+                    b.HasIndex("ComponentId1");
+
+                    b.HasIndex("alt_comp_id");
+
+                    b.HasIndex("comp_id");
 
                     b.HasIndex("mod_id");
 
@@ -319,24 +329,35 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.AlternateComponent", b =>
                 {
-                    b.HasOne("VCA.Models.Component", "Component")
-                        .WithMany("AlternateComponents")
-                        .HasForeignKey("AltCompId")
+                    b.HasOne("VCA.Models.Component", null)
+                        .WithMany("alternateComponents")
+                        .HasForeignKey("ComponentId");
+
+                    b.HasOne("VCA.Models.Component", null)
+                        .WithMany("alternateComponentss")
+                        .HasForeignKey("ComponentId1");
+
+                    b.HasOne("VCA.Models.Component", "AltCompId")
+                        .WithMany()
+                        .HasForeignKey("alt_comp_id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("VCA.Models.Component", "AltComponent")
+                    b.HasOne("VCA.Models.Component", "CompId")
                         .WithMany()
-                        .HasForeignKey("AltComponentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("comp_id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VCA.Models.Model", "ModId")
                         .WithMany("alternateComponents")
-                        .HasForeignKey("mod_id");
+                        .HasForeignKey("mod_id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("AltComponent");
+                    b.Navigation("AltCompId");
 
-                    b.Navigation("Component");
+                    b.Navigation("CompId");
 
                     b.Navigation("ModId");
                 });
@@ -413,7 +434,9 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.Component", b =>
                 {
-                    b.Navigation("AlternateComponents");
+                    b.Navigation("alternateComponents");
+
+                    b.Navigation("alternateComponentss");
                 });
 
             modelBuilder.Entity("VCA.Models.Model", b =>

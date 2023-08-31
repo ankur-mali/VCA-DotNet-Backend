@@ -32,8 +32,8 @@ namespace VCA.Services.AlternateComponent
                 { "deltaPrice", result.DeltaPrice },
                 { "altCompId", new Dictionary<string, object>
                     {
-                        { "id", result.AltCompId.Id },
-                        { "compName", result.AltCompId.CompName }
+                         { "id", result.AltComponent.Id },
+                        { "compName", result.AltComponent.CompName }
                         // Include other properties of Component entity if needed
                     }
                 }

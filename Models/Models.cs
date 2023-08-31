@@ -43,5 +43,8 @@ namespace VCA.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UpdatedAt { get; set; }
 
+
+        public ICollection<AlternateComponent>? alternateComponents { get; set;}
+
     }
 }

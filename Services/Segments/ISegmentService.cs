@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using VCA.Models;
-using VCA.Repositories;
+﻿using VCA.Models;
 namespace VCA.Services.Segments
 {
     public interface ISegmentService

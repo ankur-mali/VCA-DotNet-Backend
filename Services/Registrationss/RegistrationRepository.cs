@@ -4,7 +4,7 @@ using VCA.Repositories;
 
 namespace VCA.Services.Registrations
 {
-    
+
 
     public class RegistrationRepository : IRegistrationRepository
     {
@@ -19,7 +19,7 @@ namespace VCA.Services.Registrations
         {
             return await _dbContext.Registrations.FirstOrDefaultAsync(r => r.Email == email);
         }
-        
+
         public async Task<Registration> FindByUsernameAsync(string email)
         {
             return await _dbContext.Registrations.FirstOrDefaultAsync(r => r.Email == email);

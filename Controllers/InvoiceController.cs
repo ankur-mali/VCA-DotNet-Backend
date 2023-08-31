@@ -11,7 +11,7 @@ namespace VCA.Controllers
 
         public InvoiceController(IInvoiceRepository invoiceService)
         {
-           _invoiceService = invoiceService;
+            _invoiceService = invoiceService;
         }
 
         [HttpGet("Invoice/{id}")]

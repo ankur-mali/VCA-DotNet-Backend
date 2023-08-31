@@ -30,13 +30,10 @@ namespace VCA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AltCompId")
-                        .HasColumnType("int");
-
                     b.Property<int>("AltComponentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompId")
+                    b.Property<int>("ComponentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -56,9 +53,9 @@ namespace VCA.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AltCompId");
-
                     b.HasIndex("AltComponentId");
+
+                    b.HasIndex("ComponentId");
 
                     b.HasIndex("mod_id");
 
@@ -319,14 +316,14 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.AlternateComponent", b =>
                 {
-                    b.HasOne("VCA.Models.Component", "Component")
+                    b.HasOne("VCA.Models.Component", "AltComponent")
                         .WithMany("AlternateComponents")
-                        .HasForeignKey("AltCompId")
+                        .HasForeignKey("AltComponentId")
                         .IsRequired();
 
-                    b.HasOne("VCA.Models.Component", "AltComponent")
+                    b.HasOne("VCA.Models.Component", "Component")
                         .WithMany()
-                        .HasForeignKey("AltComponentId")
+                        .HasForeignKey("ComponentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

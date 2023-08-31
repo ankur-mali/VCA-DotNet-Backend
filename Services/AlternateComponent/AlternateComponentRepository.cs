@@ -4,7 +4,7 @@ using VCA.Repositories;
 namespace VCA.Services.AlternateComponent
 {
 
-   
+
 
     public class AlternateComponentRepository : IAlternateComponentRepository
     {

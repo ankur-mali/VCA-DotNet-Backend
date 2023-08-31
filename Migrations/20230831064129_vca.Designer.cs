@@ -12,8 +12,8 @@ using VCA.Repositories;
 namespace VCA.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230831050224_fv")]
-    partial class fv
+    [Migration("20230831064129_vca")]
+    partial class vca
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,13 @@ namespace VCA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ComponentId")
+                    b.Property<int>("AltCompId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ComponentId1")
+                    b.Property<int>("AltComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -51,24 +54,14 @@ namespace VCA.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("alt_comp_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("comp_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("mod_id")
+                    b.Property<int?>("mod_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ComponentId");
+                    b.HasIndex("AltCompId");
 
-                    b.HasIndex("ComponentId1");
-
-                    b.HasIndex("alt_comp_id");
-
-                    b.HasIndex("comp_id");
+                    b.HasIndex("AltComponentId");
 
                     b.HasIndex("mod_id");
 
@@ -329,35 +322,24 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.AlternateComponent", b =>
                 {
-                    b.HasOne("VCA.Models.Component", null)
-                        .WithMany("alternateComponents")
-                        .HasForeignKey("ComponentId");
-
-                    b.HasOne("VCA.Models.Component", null)
-                        .WithMany("alternateComponentss")
-                        .HasForeignKey("ComponentId1");
-
-                    b.HasOne("VCA.Models.Component", "AltCompId")
-                        .WithMany()
-                        .HasForeignKey("alt_comp_id")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("VCA.Models.Component", "Component")
+                        .WithMany("AlternateComponents")
+                        .HasForeignKey("AltCompId")
                         .IsRequired();
 
-                    b.HasOne("VCA.Models.Component", "CompId")
+                    b.HasOne("VCA.Models.Component", "AltComponent")
                         .WithMany()
-                        .HasForeignKey("comp_id")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("AltComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("VCA.Models.Model", "ModId")
                         .WithMany("alternateComponents")
-                        .HasForeignKey("mod_id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("mod_id");
 
-                    b.Navigation("AltCompId");
+                    b.Navigation("AltComponent");
 
-                    b.Navigation("CompId");
+                    b.Navigation("Component");
 
                     b.Navigation("ModId");
                 });
@@ -434,9 +416,7 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.Component", b =>
                 {
-                    b.Navigation("alternateComponents");
-
-                    b.Navigation("alternateComponentss");
+                    b.Navigation("AlternateComponents");
                 });
 
             modelBuilder.Entity("VCA.Models.Model", b =>

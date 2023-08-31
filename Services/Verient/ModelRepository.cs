@@ -1,8 +1,6 @@
-﻿using VCA.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
 using VCA.Models;
-using Microsoft.EntityFrameworkCore;
-using VCA.Services.Verient;
-using System.Linq;
+using VCA.Repositories;
 
 namespace VCA.Services.Verient
 

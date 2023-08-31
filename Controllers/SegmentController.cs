@@ -7,28 +7,28 @@ namespace VCA.Controllers
 
 
     [ApiController]
-        [Route("api")]
-        public class SegmentController : ControllerBase
+    [Route("api")]
+    public class SegmentController : ControllerBase
+    {
+        private readonly ISegmentService _segmentService;
+
+        public SegmentController(ISegmentService segmentService)
         {
-            private readonly ISegmentService _segmentService;
+            _segmentService = segmentService;
+        }
 
-            public SegmentController(ISegmentService segmentService)
+        [HttpGet("segments")]
+        public IActionResult GetAllSegments()
+        {
+            try
             {
-                _segmentService = segmentService;
-            }
-
-            [HttpGet("segments")]
-            public IActionResult GetAllSegments()
-            {
-                try
+                var data = _segmentService.GetAllSegments();
+                return Ok(new
                 {
-                    var data = _segmentService.GetAllSegments();
-                    return Ok(new
-                    {
-                        message = "Segments retrieved successfully",
-                        data
-                    });
-                }
+                    message = "Segments retrieved successfully",
+                    data
+                });
+            }
             catch (Exception e)
             {
                 return BadRequest(new
@@ -40,6 +40,6 @@ namespace VCA.Controllers
 
         }
     }
-    }
+}
 
 

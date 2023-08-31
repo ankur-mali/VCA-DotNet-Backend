@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VCA.Models
 {
@@ -44,7 +44,7 @@ namespace VCA.Models
         public DateTime UpdatedAt { get; set; }
 
 
-        public ICollection<AlternateComponent>? alternateComponents { get; set;}
+        public ICollection<AlternateComponent>? alternateComponents { get; set; }
 
     }
 }

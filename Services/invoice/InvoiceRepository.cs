@@ -1,6 +1,5 @@
-﻿using VCA.Repositories;
-using VCA.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using VCA.Repositories;
 
 namespace VCA.Services.Invoices
 {

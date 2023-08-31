@@ -12,8 +12,8 @@ using VCA.Repositories;
 namespace VCA.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230830051906_cv")]
-    partial class cv
+    [Migration("20230831095532_jsh")]
+    partial class jsh
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,17 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.AlternateComponent", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AltComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAddOrUpdate()
@@ -45,20 +51,14 @@ namespace VCA.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("alt_comp_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("comp_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("mod_id")
+                    b.Property<int?>("mod_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("alt_comp_id");
+                    b.HasIndex("AltComponentId");
 
-                    b.HasIndex("comp_id");
+                    b.HasIndex("ComponentId");
 
                     b.HasIndex("mod_id");
 
@@ -80,6 +80,45 @@ namespace VCA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("components");
+                });
+
+            modelBuilder.Entity("VCA.Models.Invoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AltCompId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AuthId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AltCompId");
+
+                    b.HasIndex("AuthId");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("VCA.Models.Manufacturer", b =>
@@ -154,11 +193,11 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.Registration", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AddressLine1")
                         .IsRequired()
@@ -280,29 +319,49 @@ namespace VCA.Migrations
 
             modelBuilder.Entity("VCA.Models.AlternateComponent", b =>
                 {
-                    b.HasOne("VCA.Models.Component", "AltCompId")
-                        .WithMany()
-                        .HasForeignKey("alt_comp_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("VCA.Models.Component", "AltComponent")
+                        .WithMany("AlternateComponents")
+                        .HasForeignKey("AltComponentId")
                         .IsRequired();
 
-                    b.HasOne("VCA.Models.Component", "CompId")
+                    b.HasOne("VCA.Models.Component", "Component")
                         .WithMany()
-                        .HasForeignKey("comp_id")
+                        .HasForeignKey("ComponentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("VCA.Models.Model", "ModId")
+                        .WithMany("alternateComponents")
+                        .HasForeignKey("mod_id");
+
+                    b.Navigation("AltComponent");
+
+                    b.Navigation("Component");
+
+                    b.Navigation("ModId");
+                });
+
+            modelBuilder.Entity("VCA.Models.Invoice", b =>
+                {
+                    b.HasOne("VCA.Models.AlternateComponent", "AlternateComponent")
                         .WithMany()
-                        .HasForeignKey("mod_id")
+                        .HasForeignKey("AltCompId");
+
+                    b.HasOne("VCA.Models.Registration", "Registration")
+                        .WithMany()
+                        .HasForeignKey("AuthId");
+
+                    b.HasOne("VCA.Models.Model", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AltCompId");
+                    b.Navigation("AlternateComponent");
 
-                    b.Navigation("CompId");
+                    b.Navigation("Model");
 
-                    b.Navigation("ModId");
+                    b.Navigation("Registration");
                 });
 
             modelBuilder.Entity("VCA.Models.Manufacturer", b =>
@@ -350,6 +409,16 @@ namespace VCA.Migrations
                     b.Navigation("Component");
 
                     b.Navigation("Model");
+                });
+
+            modelBuilder.Entity("VCA.Models.Component", b =>
+                {
+                    b.Navigation("AlternateComponents");
+                });
+
+            modelBuilder.Entity("VCA.Models.Model", b =>
+                {
+                    b.Navigation("alternateComponents");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,4 @@
-﻿using Azure;
-using VCA.Models;
+﻿using VCA.Models;
 namespace VCA.Services.Verient
 
 

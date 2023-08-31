@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VCA.Models
@@ -16,9 +15,9 @@ namespace VCA.Models
         [Column] // Use 'unique: true' for unique constraint
         public string SegName { get; set; }
 
-        
-       
 
-       
+
+
+
     }
 }

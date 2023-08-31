@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using VCA.Models;
 using VCA.Repositories;
-using VCA.Services;
 
 namespace VCA.Controllers
 {

@@ -37,15 +37,10 @@ namespace VCA.Repositories
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<AlternateComponent>()
-                .HasOne(ac => ac.Component)
-                .WithMany(c => c.AlternateComponents)
-                .HasForeignKey(ac => ac.CompId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-            modelBuilder.Entity<AlternateComponent>()
-                .HasOne(ac => ac.Component)
-                .WithMany(c => c.AlternateComponents)
-                .HasForeignKey(ac => ac.AltCompId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                 .HasOne(ac => ac.AltComponent)
+                 .WithMany(c => c.AlternateComponents)
+                 .HasForeignKey(ac => ac.AltComponentId)
+                 .OnDelete(DeleteBehavior.ClientSetNull);
 
 
 
@@ -66,11 +61,11 @@ namespace VCA.Repositories
 
         public DbSet<Registration> Registrations { get; set; }
 
-        public DbSet<Component> Components { get; set; }   
-        
+        public DbSet<Component> Components { get; set; }
+
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        public DbSet<Invoice> Invoices { get; set; }    
+        public DbSet<Invoice> Invoices { get; set; }
 
         public DbSet<AlternateComponent> AlternateComponents { get; set; }
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using VCA.Models;
+﻿using VCA.Models;
 
 namespace VCA.Repositories
 {

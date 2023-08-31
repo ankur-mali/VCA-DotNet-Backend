@@ -1,15 +1,12 @@
 
 using Microsoft.EntityFrameworkCore;
-using VCA.Services.Segments;
 using VCA.Repositories;
-using VCA.Services;
-using VCA.Services.Manufaturers;
-using Microsoft.EntityFrameworkCore.Metadata;
-using VCA.Services.Verient;
-using Microsoft.EntityFrameworkCore.Internal;
-using VCA.Services.Registrations;
 using VCA.Services.AlternateComponent;
 using VCA.Services.Invoices;
+using VCA.Services.Manufaturers;
+using VCA.Services.Registrations;
+using VCA.Services.Segments;
+using VCA.Services.Verient;
 
 namespace VCA
 {
@@ -22,12 +19,12 @@ namespace VCA
             // Add services to the container.
 
             builder.Services.AddControllers();
-            
+
             builder.Services.AddTransient<ISegmentService, SegmentServiceImpl>();
             builder.Services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
-            builder.Services.AddTransient<IModelRepository,ModelRepository>();
-            builder.Services.AddTransient<IRegistrationRepository,RegistrationRepository>();
-            builder.Services.AddTransient<IComponentRepository,ComponentRepository>();
+            builder.Services.AddTransient<IModelRepository, ModelRepository>();
+            builder.Services.AddTransient<IRegistrationRepository, RegistrationRepository>();
+            builder.Services.AddTransient<IComponentRepository, ComponentRepository>();
             builder.Services.AddTransient<IAlternateComponentRepository, AlternateComponentRepository>();
             builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
             builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeDBConnection")));
@@ -39,7 +36,7 @@ namespace VCA
                 options.AddPolicy("MyAllowSpecificOrigins",
                                   builder =>
                                   {
-                                     // builder.WithOrigins("http://127.0.0.1:5500")
+                                      // builder.WithOrigins("http://127.0.0.1:5500")
                                       builder.WithOrigins("*")
                                       .AllowAnyHeader()
                                       .AllowAnyMethod();

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using VCA.Models;
 
 namespace VCA.Repositories
@@ -39,8 +36,8 @@ namespace VCA.Repositories
                 return null;
 
             existingComponent.CompName = component.CompName;
-          
-            
+
+
 
             await _dbContext.SaveChangesAsync();
             return existingComponent;

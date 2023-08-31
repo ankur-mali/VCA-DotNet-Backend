@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using VCA.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VCA.Models
 {
@@ -18,9 +17,9 @@ namespace VCA.Models
         [ForeignKey("Segment")]
         [Required]
         public int SegId { get; set; }
-       
+
         public virtual Segment Segment { get; set; }
 
-       
+
     }
 }
